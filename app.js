@@ -1,4 +1,3 @@
-
 var express = require('express');
 var app = express();
 
@@ -17,7 +16,6 @@ app.get('/chipotle', function(req,res){
     var checkins = data.response.checkins.items;
     var currentTime = new Date();
     var minutesSinceCheckin;
-
     checkins.some(function(e,i,a){
       if(e.venue.name.indexOf("Chipotle")!=-1){
         var time = e.createdAt;
@@ -37,11 +35,10 @@ app.get('/chipotle', function(req,res){
     }
     res.send(text);
   });
-}
+});
 
 
-app.listen(80);
-
+app.listen(8000);
 
 //code from http://www.movable-type.co.uk/scripts/latlong.html
 function calculateDistance(lon1, lat1) {
