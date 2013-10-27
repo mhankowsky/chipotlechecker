@@ -35,8 +35,14 @@ app.get('/chipotle', function(req,res){
     var text;
     if(minutesSinceCheckin != undefined){
       var days = minutesSinceCheckin / 1440;
-  
-      text = "Its has been "+days+" days since you have been to Chipotle according to fourSquare";
+      var hours = minutesSinceCheckin / 60;
+      if(hours < 0){
+        text = "Its has been "+minutesSinceCheckin+" minutes since Jackson has been to Chipotle according to fourSquare";
+      }
+      else if(days<0){
+        text = "Its has been "+hours+" hours since Jackson has been to Chipotle according to fourSquare";
+      }
+      text = "Its has been "+days+" days since Jackson has been to Chipotle according to fourSquare";
       
     }
     else{
