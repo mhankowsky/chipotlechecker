@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  console.log("Update");
   update();
   $("#update").click(function() {
     update();
@@ -7,30 +8,14 @@ $(document).ready(function() {
 });
 
 function update() {
-  var accessToken = window.location.hash.split("=")[1];
-  var User = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=" + accessToken + "&v=20131023&limit=200";
-  $.get(User, function(data, status) {
-    console.log(data);
-    var checkins = data.response.checkins.items;
-    var currentTime = new Date();
-    var minutesSinceCheckin;
-
-    checkins.some(function(e,i,a){
-      if(e.venue.name.indexOf("Chipotle")!=-1){
-        var time = e.createdAt;
-        minutesSinceCheckin = (currentTime.getTime() / 1000 - time) / 60;
-        return 1;
+  $.ajax({
+      type: "GET",
+      url: "/chipotle",
+      dataType: "JSON",
+      success: function(response){
+        console.log(response.data);
+        $(".data").html(response.data);
       }
-    });
-
-    if(minutesSinceCheckin != undefined){
-      var days = minutesSinceCheckin / 1440;
-
-      $("#Min").text("Its has been "+days+" days since you have been to Chipotle according to fourSquare")
-    }
-    else{
-      $("#Min").text("You have not checked into Chipotle in a lonnngggg time")
-    }
   });
 }
 

@@ -1,4 +1,5 @@
 var express = require('express');
+var request = require('request');
 var app = express();
 
 app.use(express.bodyParser());
@@ -7,13 +8,19 @@ app.use(express.static(__dirname));
 
 
   
+app.get('/', function(req,res){
+  res.redirect("static/index.html");
+});
 
 app.get('/chipotle', function(req,res){
   var accessToken = 'HD2PQQBPMTSA2RR0TNG52T4XRHQKON0BRK0QUZW4BOM42YGV';
   var User = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=" + accessToken + "&v=20131023&limit=200";
-  $.get(User, function(data, status) {
-    console.log(data);
-    var checkins = data.response.checkins.items;
+  request.get(User, function(err, response, body) {
+    if(err){
+      console.log(err);
+      res.send(500);
+    }
+    var checkins = JSON.parse(body).response.checkins.items;
     var currentTime = new Date();
     var minutesSinceCheckin;
     checkins.some(function(e,i,a){
@@ -29,11 +36,13 @@ app.get('/chipotle', function(req,res){
       var days = minutesSinceCheckin / 1440;
   
       text = "Its has been "+days+" days since you have been to Chipotle according to fourSquare";
+      
     }
     else{
       text = "You have not checked into Chipotle in a lonnngggg time";
     }
-    res.send(text);
+    console.log(text);
+    res.send({data:text});
   });
 });
 
