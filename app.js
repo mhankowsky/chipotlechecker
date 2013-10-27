@@ -37,13 +37,13 @@ app.get('/chipotle', function(req,res){
       var days = Math.floor(minutesSinceCheckin / 1440);
       var hours = Math.floor(minutesSinceCheckin / 60);
       if(hours==0){
-        text = "Its has been "+minutesSinceCheckin+" minutes since Jackson has been to Chipotle";
+        text = "It has been "+minutesSinceCheckin+" minutes since Jackson has been to Chipotle";
       }
       else if(days==0){
-        text = "Its has been "+hours+" hours since Jackson has been to Chipotle";
+        text = "It has been "+hours+" hours since Jackson has been to Chipotle";
       }
       else{
-        text = "Its has been "+days+" days since Jackson has been to Chipotle";
+        text = "It has been "+days+" days since Jackson has been to Chipotle";
       }
       
     }
