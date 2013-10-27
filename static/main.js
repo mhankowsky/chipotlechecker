@@ -10,7 +10,7 @@ $(document).ready(function() {
 function update() {
   $.ajax({
       type: "GET",
-      url: "/chipotle",
+      url: "http://jackson-chiptole.herokuapp.com/chipotle",
       dataType: "JSON",
       success: function(response){
         console.log(response.data);

@@ -13,6 +13,7 @@ app.get('/', function(req,res){
 });
 
 app.get('/chipotle', function(req,res){
+  res.header("Access-Control-Allow-Origin", "*");
   var accessToken = 'HD2PQQBPMTSA2RR0TNG52T4XRHQKON0BRK0QUZW4BOM42YGV';
   var User = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=" + accessToken + "&v=20131023&limit=200";
   request.get(User, function(err, response, body) {
