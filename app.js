@@ -1,13 +1,11 @@
-$(document).ready(function() {
-  update();
-  $("#update").click(function() {
-    update();
-  });
 
-});
+var express = require('express');
+var app = express();
 
-function update() {
-  var accessToken = window.location.hash.split("=")[1];
+
+
+app.get('/chipotle', function(req,res){
+  var accessToken = 'HD2PQQBPMTSA2RR0TNG52T4XRHQKON0BRK0QUZW4BOM42YGV';
   var User = "https://api.foursquare.com/v2/users/self/checkins?oauth_token=" + accessToken + "&v=20131023&limit=200";
   $.get(User, function(data, status) {
     console.log(data);
@@ -23,16 +21,21 @@ function update() {
       }
     });
 
+    var text;
     if(minutesSinceCheckin != undefined){
       var days = minutesSinceCheckin / 1440;
-
-      $("#Min").text("Its has been "+days+" days since you have been to Chipotle according to fourSquare")
+  
+      text = "Its has been "+days+" days since you have been to Chipotle according to fourSquare";
     }
     else{
-      $("#Min").text("You have not checked into Chipotle in a lonnngggg time")
+      text = "You have not checked into Chipotle in a lonnngggg time";
     }
+    res.send(text);
   });
 }
+
+
+app.listen(80);
 
 
 //code from http://www.movable-type.co.uk/scripts/latlong.html
