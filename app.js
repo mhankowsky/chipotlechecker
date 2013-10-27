@@ -46,8 +46,8 @@ app.get('/chipotle', function(req,res){
   });
 });
 
-
-app.listen(80);
+var port = process.env.PORT || 8000;
+app.listen(port);
 
 //code from http://www.movable-type.co.uk/scripts/latlong.html
 function calculateDistance(lon1, lat1) {
