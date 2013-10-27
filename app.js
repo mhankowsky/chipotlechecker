@@ -2,7 +2,12 @@
 var express = require('express');
 var app = express();
 
+app.use(express.bodyParser());
+app.use(app.router);
+app.use(express.static(__dirname));
 
+
+  
 
 app.get('/chipotle', function(req,res){
   var accessToken = 'HD2PQQBPMTSA2RR0TNG52T4XRHQKON0BRK0QUZW4BOM42YGV';
